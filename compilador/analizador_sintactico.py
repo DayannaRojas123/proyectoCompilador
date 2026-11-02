@@ -1,34 +1,6 @@
-# analizador_sintactico.py
-# =====================================================================
-# Analizador sintáctico por descenso recursivo del lenguaje educativo.
-#
-# ---------------------------------------------------------------------
-# EJEMPLO TRAZADO
-# ---------------------------------------------------------------------
-# Entrada (tokens del lexer):
-#   var x : entero = 2 + 3 * 4;
-#
-# Salida (AST + errores):
-#   ["programa", [
-#     ["declaracion", "x", "entero",
-#       ["binaria", "+",
-#         ["entero", 2, 1, 18],
-#         ["binaria", "*",
-#           ["entero", 3, 1, 22],
-#           ["entero", 4, 1, 26],
-#           1, 24],
-#         1, 20],
-#       1, 5]
-#   ]]
-#   errores = []
-#
-# Con error:
-#   var x : entero = 5        (falta ';')
-#   errores = [["SINTACTICO", "Se esperaba ';' al final", 1, 28]]
-# ---------------------------------------------------------------------
-
+ç
 # Importamos las constantes de tipos de token que necesita el parser.
-from lenguaje import (
+from .lenguaje import (
     TIPO_PALABRA_RESERVADA, TIPO_TIPO_DATO, TIPO_BOOLEANO_LITERAL,     # categorías especiales
     TIPO_OPERADOR_Y, TIPO_OPERADOR_O, TIPO_OPERADOR_NO,                # operadores lógicos
     TIPO_IDENTIFICADOR, TIPO_ENTERO, TIPO_DECIMAL, TIPO_CADENA,         # literales y nombres
@@ -445,7 +417,7 @@ def formatear_operacion(nodo, nivel):
 
 # ------------------ Bloque de comprobación manual ---------------------
 if __name__ == "__main__":
-    from analizador_lexico import analizar_lexico                  # importamos el lexer
+    from .analizador_lexico import analizar_lexico                  # importamos el lexer
     codigo_demostracion = 'var x : entero = 2 + 3 * 4;'            # programa de ejemplo
     lista_tokens, _ = analizar_lexico(codigo_demostracion)         # obtener tokens
     arbol, lista_errores = analizar_sintactico(lista_tokens)       # analizar

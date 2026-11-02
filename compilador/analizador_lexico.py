@@ -1,41 +1,7 @@
-# analizador_lexico.py
-# =====================================================================
-# Analizador léxico del lenguaje educativo.
-# Convierte el texto fuente en una lista de tokens y una lista de
-# errores léxicos. Cada token es una lista [tipo, lexema, linea,
-# columna, valor_interpretado].
-#
-# ---------------------------------------------------------------------
-# EJEMPLO TRAZADO
-# ---------------------------------------------------------------------
-# Entrada:
-#     var edad : entero = 2 + 3 * 4;
-#     mostrar edad;
-#
-# Salida (tokens, errores):
-#     tokens[0]  = [PALABRA_RESERVADA, "var",    1, 1,  "var"]
-#     tokens[1]  = [IDENTIFICADOR,     "edad",   1, 5,  "edad"]
-#     tokens[2]  = [DOS_PUNTOS,        ":",      1, 10, None]
-#     tokens[3]  = [TIPO_DATO,         "entero", 1, 12, "entero"]
-#     tokens[4]  = [ASIGNACION,        "=",      1, 19, None]
-#     tokens[5]  = [ENTERO,            "2",      1, 21, 2]
-#     tokens[6]  = [SUMA,              "+",      1, 23, None]
-#     tokens[7]  = [ENTERO,            "3",      1, 25, 3]
-#     tokens[8]  = [MULTIPLICACION,    "*",      1, 27, None]
-#     tokens[9]  = [ENTERO,            "4",      1, 29, 4]
-#     tokens[10] = [PUNTO_COMA,        ";",      1, 30, None]
-#     ...
-#     tokens[-1] = [FIN,               "",       2, 14, None]
-#     errores = []
-#
-# Entrada con error:
-#     var x = 5 @ 3;
-# Salida:
-#     errores = [["LEXICO", "Caracter no permitido: @", 1, 11]]
-# ---------------------------------------------------------------------
+
 
 # Importamos las constantes del lenguaje (todas las que usamos aquí).
-from lenguaje import (
+from .lenguaje import (
     PALABRAS_RESERVADAS_SIMPLES, TIPOS_DATOS, LITERALES_BOOLEANOS,  # listas de palabras del lenguaje
     TIPO_PALABRA_RESERVADA, TIPO_TIPO_DATO, TIPO_BOOLEANO_LITERAL,  # tipos de palabra reservada
     TIPO_OPERADOR_Y, TIPO_OPERADOR_O, TIPO_OPERADOR_NO,             # operadores lógicos como palabra

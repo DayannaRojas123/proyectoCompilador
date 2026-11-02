@@ -1,39 +1,4 @@
-# analizador_semantico.py
-# =====================================================================
-# Analizador semántico del lenguaje educativo.
-# Recorre el AST, construye la tabla de símbolos y detecta errores
-# semánticos: variables no declaradas, redeclaraciones y tipos
-# incompatibles en declaraciones, asignaciones y expresiones.
-#
-# ---------------------------------------------------------------------
-# EJEMPLO TRAZADO
-# ---------------------------------------------------------------------
-# Entrada (AST generado por analizador_sintactico.py):
-#   var x : entero = 2 + 3 * 4; mostrar x;
-#
-# AST recibido:
-#   ["programa", [
-#     ["declaracion", "x", "entero",
-#       ["binaria", "+",
-#         ["entero", 2, 1, 18],
-#         ["binaria", "*",
-#           ["entero", 3, 1, 22],
-#           ["entero", 4, 1, 26],
-#           1, 24],
-#         1, 20],
-#       1, 5],
-#     ["mostrar", ["identificador", "x", 1, 37], 1, 29]
-#   ]]
-#
-# Salida:
-#   tabla_simbolos     = [["x", "entero", 1, 5]]
-#   errores_semanticos = []
-#
-# Con error: var y : entero = "hola";
-#   errores_semanticos = [["SEMANTICO",
-#     "Tipo incompatible en declaracion: se esperaba entero pero la expresion es cadena",
-#     1, 5]]
-# ---------------------------------------------------------------------
+
 
 # Estado global del análisis semántico.
 tabla_simbolos = []          # cada entrada es [nombre, tipo, linea, columna]
@@ -267,8 +232,8 @@ def formatear_tabla_simbolos_a_texto(tabla):
 
 # ------------------ Bloque de comprobación manual ---------------------
 if __name__ == "__main__":
-    from analizador_lexico import analizar_lexico   # importar el lexer
-    from analizador_sintactico import analizar_sintactico  # importar el parser
+    from .analizador_lexico import analizar_lexico   # importar el lexer
+    from .analizador_sintactico import analizar_sintactico  # importar el parser
 
     def demostrar(codigo):
         tokens, errores_lexicos = analizar_lexico(codigo)          # fase 1

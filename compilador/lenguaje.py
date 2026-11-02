@@ -13,7 +13,7 @@
 # EJEMPLO TRAZADO
 # ---------------------------------------------------------------------
 # Entrada (en Python interactivo):
-#     >>> from lenguaje import es_tipo_dato, es_palabra_reservada
+#     >>> from compilador.lenguaje import es_tipo_dato, es_palabra_reservada
 #     >>> es_tipo_dato("entero")
 #     >>> es_tipo_dato("perro")
 #     >>> es_palabra_reservada("var")

@@ -11,7 +11,7 @@
 # Cerrar: botón X de la ventana o Ctrl+C en la terminal
 # ---------------------------------------------------------------------
 
-from interfaz_grafica import iniciar_aplicacion     # única dependencia: la interfaz
+from interfaz.ventana import iniciar_aplicacion     # única dependencia: la interfaz
 
 if __name__ == "__main__":
     iniciar_aplicacion()                            # arranca el bucle de eventos
