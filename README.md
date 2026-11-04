@@ -1,67 +1,174 @@
 # Compilador Educativo — LenguajeEducativo
 
-Compilador didáctico escrito en Python con interfaz gráfica Tkinter. Analiza un
-programa en tres fases (**léxica → sintáctica → semántica**) y muestra los
-tokens, el árbol sintáctico, la tabla de símbolos, los errores y un informe final.
+Proyecto académico de Ingeniería de Sistemas. Compilador educativo que
+procesa un lenguaje de programación propio y pequeño, implementando las
+tres fases fundamentales: análisis léxico, análisis sintáctico y análisis
+semántico, con interfaz gráfica interactiva en español.
 
-## Cómo ejecutarlo
+No ejecuta el programa ni genera código máquina. El objetivo es demostrar
+correctamente las tres fases del compilador.
 
-Requisitos: **Python 3.8 o superior** (Tkinter ya viene incluido en Windows y macOS;
-en Linux: `sudo apt install python3-tk`). No hay que instalar nada más.
+---
 
-```bash
-cd proyectoCompilador
-python principal.py          # en algunos sistemas: python3 principal.py
-```
+## 1. Qué es
 
-Uso: escribe código en el editor (o pulsa un botón de **Ejemplos**) y pulsa
-**Analizar** (atajos: `Ctrl+Enter` o `F5`).
+El usuario escribe código fuente en un editor gráfico. Al pulsar el botón
+**Analizar**, el compilador procesa ese código y muestra:
 
-Pruebas automáticas:
+- La lista de **tokens** generados (fase léxica).
+- El **árbol sintáctico** construido (fase sintáctica).
+- La **tabla de símbolos** y los errores semánticos (fase semántica).
+- Un **informe final** con el estado global de la compilación.
 
-```bash
-python -m unittest -v
-```
+Cada fase usa los resultados reales de la fase anterior. No hay
+resultados fijos ni simulaciones: si el usuario cambia el código, cambian
+todos los resultados.
 
-## Estructura del proyecto
+---
 
-```
-proyectoCompilador/
-├── principal.py              Punto de entrada (abre la ventana)
-├── compilador/               Lógica del compilador (sin interfaz)
-│   ├── lenguaje.py             Constantes y palabras reservadas del lenguaje
-│   ├── analizador_lexico.py    Fase 1: texto  -> tokens
-│   ├── analizador_sintactico.py Fase 2: tokens -> árbol sintáctico
-│   └── analizador_semantico.py Fase 3: árbol  -> tabla de símbolos y tipos
-├── interfaz/                 Interfaz gráfica (Tkinter)
-│   ├── ventana.py              Distribución de la ventana y acciones de los botones
-│   ├── editor.py               Editor: números de línea, colores, líneas con error
-│   ├── tema.py                 Paleta de colores, fuentes y estilos
-│   ├── ejemplos.py             Programas de ejemplo de los botones
-│   └── formato.py              Conversión de resultados a texto
-├── tests/                    Pruebas automáticas
-└── docs/                     explicaciones.md, guia_sustentacion.md
-```
+## 2. Requisitos
 
-Regla de dependencias: `principal.py` → `interfaz` → `compilador`. El paquete
-`compilador` no importa nada de la interfaz, así que se puede usar o probar solo:
+- **Python 3.10 o superior** (probado con 3.12).
+- **Tkinter** (viene incluido con Python en Windows y macOS).
+- Editor de texto: cualquiera sirve (VS Code, Notepad++, IDLE).
 
-```bash
-python -m compilador.analizador_lexico      # demo de cada módulo
-python -m compilador.analizador_sintactico
-python -m compilador.analizador_semantico
-```
+**No se necesitan dependencias externas.** Nada de `pip install`. Todo
+usa la biblioteca estándar de Python.
 
-## Personalizar la apariencia
+### Verificar la instalación
+python --version
+Debe mostrar 3.10 o superior. En Mac/Linux puede ser `python3`.
 
-Colores y tipografías: `interfaz/tema.py`. Ejemplos de los botones: `interfaz/ejemplos.py`.
+python -c "import tkinter; print('tkinter OK')"
+Debe imprimir `tkinter OK`.
 
-## Lenguaje de ejemplo
+---
 
-```
-var edad : entero = 2 + 3 * 4;
-mostrar edad;
-```
+## 3. Cómo ejecutar
 
-Tipos: `entero`, `decimal`, `cadena`, `booleano`. Palabras reservadas: `var`, `mostrar`,
-`verdadero`, `falso`, `y`, `o`, `no` (por eso `y` no se puede usar como nombre de variable).
+### 3.1 Abrir la interfaz gráfica
+
+Desde la carpeta `proyecto_compilador`:
+python principal.py
+
+text
+
+Se abre una ventana con el editor, el estado de las fases, las pestañas
+de resultados y los botones. Cerrar con la X de la esquina.
+
+En Mac/Linux usar `python3 principal.py`.
+
+### 3.2 Ejecutar las pruebas automatizadas
+python pruebas.py
+
+text
+
+Salida esperada:
+............
+
+Ran 12 tests in 0.045s
+
+OK
+
+text
+
+### 3.3 Probar cada fase por separado (opcional)
+
+Cada archivo tiene un bloque de comprobación al final:
+python analizador_lexico.py
+python analizador_sintactico.py
+python analizador_semantico.py
+
+text
+
+Cada uno imprime un ejemplo propio de su fase.
+
+---
+
+## 4. Estructura del proyecto
+
+Todos los archivos están al mismo nivel (sin subcarpetas):
+proyecto_compilador/
+├── lenguaje.py Definiciones del lenguaje (tipos de token, palabras)
+├── analizador_lexico.py Fase 1: texto → tokens
+├── analizador_sintactico.py Fase 2: tokens → AST
+├── analizador_semantico.py Fase 3: AST → tabla de símbolos y errores
+├── interfaz_grafica.py Ventana Tkinter
+├── principal.py Punto de entrada
+├── pruebas.py 12 pruebas con unittest
+├── README.md Este documento
+├── GUIA_GITHUB.md Guía para trabajo en equipo
+├── GUIA_SUSTENTACION.md Guía para defender el proyecto
+└── .gitignore Archivos que Git no debe subir
+
+text
+
+---
+
+## 5. El lenguaje — LenguajeEducativo
+
+### 5.1 Instrucciones
+
+- **Declaración con inicialización:** `var nombre : tipo = expresion;`
+- **Asignación:** `nombre = expresion;`
+- **Mostrar:** `mostrar expresion;`
+- **Comentarios:** `// hasta fin de línea`
+
+### 5.2 Tipos de dato
+
+- `entero`
+- `decimal`
+- `cadena`
+- `booleano`
+
+### 5.3 Literales
+
+- Enteros: `42`, `0`, `100`
+- Decimales: `3.14`, `0.5`, `7.0`
+- Cadenas: `"hola"`, `"mundo"` (sin escapes)
+- Booleanos: `verdadero`, `falso`
+
+### 5.4 Operadores y precedencia
+
+De mayor a menor precedencia:
+
+| Nivel | Operadores | Asociatividad |
+|-------|------------|---------------|
+| 1 | `( )` | — |
+| 2 | `-` unario | derecha |
+| 3 | `*`, `/` | izquierda |
+| 4 | `+`, `-` | izquierda |
+| 5 | `==`, `!=`, `<`, `>`, `<=`, `>=` | no encadenables |
+| 6 | `no` | derecha |
+| 7 | `y` | izquierda |
+| 8 | `o` | izquierda |
+
+### 5.5 Gramática en EBNF
+
+```ebnf
+programa              = { instruccion } ;
+
+instruccion           = declaracion | asignacion | mostrar ;
+
+declaracion           = "var" identificador ":" tipo "=" expresion ";" ;
+asignacion            = identificador "=" expresion ";" ;
+mostrar               = "mostrar" expresion ";" ;
+
+tipo                  = "entero" | "decimal" | "cadena" | "booleano" ;
+
+expresion             = expresion_logica ;
+expresion_logica      = expresion_y { "o" expresion_y } ;
+expresion_y           = expresion_no { "y" expresion_no } ;
+expresion_no          = [ "no" ] expresion_relacional ;
+expresion_relacional  = expresion_aritmetica
+                        [ operador_relacional expresion_aritmetica ] ;
+expresion_aritmetica  = termino { ( "+" | "-" ) termino } ;
+termino               = factor { ( "*" | "/" ) factor } ;
+factor                = [ "-" ] primario ;
+
+primario              = entero | decimal | cadena
+                      | "verdadero" | "falso"
+                      | identificador
+                      | "(" expresion ")" ;
+
+operador_relacional   = "==" | "!=" | "<" | ">" | "<=" | ">=" ;

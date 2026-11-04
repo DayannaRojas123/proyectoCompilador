@@ -1,4 +1,3 @@
-ç
 # Importamos las constantes de tipos de token que necesita el parser.
 from .lenguaje import (
     TIPO_PALABRA_RESERVADA, TIPO_TIPO_DATO, TIPO_BOOLEANO_LITERAL,     # categorías especiales
